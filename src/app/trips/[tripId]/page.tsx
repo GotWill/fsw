@@ -3,6 +3,7 @@ import Image from "next/image";
 import ReactCountryFlag from "react-country-flag";
 import { TripHeader } from "./components/TripHeader";
 import { TripReservation } from "./components/TripReservation";
+import { TripDescription } from "./components/TripDescription";
 
 
 async function getTrip(tripId: string) {
@@ -27,6 +28,7 @@ async function TripDetails({ params }: { params: { tripId: string } }) {
            <TripHeader trip={trip}/>
 
            <TripReservation trip={trip}/>
+           <TripDescription description={trip.description}/>
         </div>
     )
 }
