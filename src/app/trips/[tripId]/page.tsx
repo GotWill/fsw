@@ -2,6 +2,7 @@ import { prisma } from "@/app/lib/prisma"
 import Image from "next/image";
 import ReactCountryFlag from "react-country-flag";
 import { TripHeader } from "./components/TripHeader";
+import { TripReservation } from "./components/TripReservation";
 
 
 async function getTrip(tripId: string) {
@@ -25,9 +26,7 @@ async function TripDetails({ params }: { params: { tripId: string } }) {
            
            <TripHeader trip={trip}/>
 
-            <div>
-                
-            </div>
+           <TripReservation trip={trip}/>
         </div>
     )
 }
