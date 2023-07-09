@@ -31,7 +31,7 @@ async function TripDetails({ params }: { params: { tripId: string } }) {
            
            <TripHeader trip={trip}/>
 
-           <TripReservation tripStartDate={trip.startDate} tripEndDate={trip.endDate} maxGuests={trip.maxGuests}/>
+           <TripReservation pricePerDay={trip.pricePerDay as any} tripStartDate={trip.startDate} tripEndDate={trip.endDate} maxGuests={trip.maxGuests}/>
            <TripDescription description={trip.description}/>
            <TripHighLights highlights={trip.highlights}/>
            <TripLocation location={trip.location} locationDescription={trip.locationDescription}/>
