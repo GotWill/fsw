@@ -7,6 +7,7 @@ import { differenceInDays } from "date-fns";
 import { Controller, useForm } from "react-hook-form";
 
 interface TripReservationProps {
+    tripId: string;
     tripStartDate: Date;
     tripEndDate: Date;
     maxGuests: number;
@@ -16,17 +17,61 @@ interface TripReservationProps {
 
 
 interface TripReservationForm {
+    
     guests: number;
     startDate: Date | null;
     endDate: Date | null;
 }
 
-export function TripReservation({maxGuests, pricePerDay, tripEndDate, tripStartDate }: TripReservationProps) {
+export function TripReservation({tripId, maxGuests, pricePerDay, tripEndDate, tripStartDate }: TripReservationProps) {
 
-    const { register, handleSubmit, formState: {errors}, control, watch } = useForm<TripReservationForm>()
+    const { register, handleSubmit, formState: {errors}, control, watch, setError } = useForm<TripReservationForm>()
 
-    const onSubmit = (data: any) => {
-        console.log({data})
+    const onSubmit = async (data: TripReservationForm) => {
+        const response = await fetch('http://localhost:3000/api/trips/check', {
+            method: 'POST',
+            body: Buffer.from(JSON.stringify({ 
+                startDate: data.startDate,
+                endDate: data.endDate, 
+                tripId
+            }))
+        })
+
+        const req = await response.json();
+
+      
+        
+
+        if(req?.error?.code === 'TRIP_ALREADY_RESERVED'){
+            setError("startDate", {
+                type: 'manual',
+                message: 'Esta data ja esta reservada'
+            })
+
+            setError("endDate", {
+                type: 'manual',
+                message: 'Esta data ja esta reservada'
+            })
+        }
+
+        if(req?.error?.code === 'INVALID_START_DATE'){
+            setError("startDate", {
+                type: 'manual',
+                message: 'Data invalida'
+            })
+
+        }
+
+        if(req?.error?.code === 'INVALID_END_DATE'){
+            setError("endDate", {
+                type: 'manual',
+                message: 'Data invalida'
+            })
+
+        }
+
+
+        
     }
 
 
