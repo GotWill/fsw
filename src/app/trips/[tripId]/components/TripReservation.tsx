@@ -6,7 +6,10 @@ import { Trip } from "@prisma/client";
 import { Controller, useForm } from "react-hook-form";
 
 interface TripReservationProps {
-    trip: Trip
+    tripStartDate: Date;
+    tripEndDate: Date;
+    maxGuests: number;
+
 }
 
 
@@ -16,14 +19,16 @@ interface TripReservationForm {
     endDate: Date | null;
 }
 
-export function TripReservation({ trip }: TripReservationProps) {
+export function TripReservation({maxGuests, tripEndDate, tripStartDate }: TripReservationProps) {
 
-    const { register, handleSubmit, formState: {errors}, control } = useForm<TripReservationForm>()
+    const { register, handleSubmit, formState: {errors}, control, watch } = useForm<TripReservationForm>()
 
     const onSubmit = (data: any) => {
         console.log({data})
     }
 
+
+    const startDate = watch('startDate')
 
     return (
         <div className="flex flex-col px-5 ">
@@ -38,7 +43,14 @@ export function TripReservation({ trip }: TripReservationProps) {
                     }}
                     control={control}
                     render={({field}) => (
-                        <DatePicker error={!!errors.startDate} errorMessage={errors.startDate?.message} placeholderText="Data de Inicio" onChange={field.onChange} selected={field.value}  className="w-full" />
+                        <DatePicker 
+                        error={!!errors.startDate} 
+                        errorMessage={errors.startDate?.message} 
+                        placeholderText="Data de Inicio" 
+                        onChange={field.onChange} 
+                        selected={field.value} 
+                        minDate={tripStartDate}
+                        className="w-full" />
 
                     )}
                     
@@ -53,7 +65,16 @@ export function TripReservation({ trip }: TripReservationProps) {
                     }}
                     control={control}
                     render={({field}) => (
-                        <DatePicker error={!!errors.endDate} errorMessage={errors.endDate?.message} placeholderText="Data de Inicio" onChange={field.onChange} selected={field.value}  className="w-full" />
+                        <DatePicker 
+                        error={!!errors.endDate} 
+                        errorMessage={errors.endDate?.message} 
+                        placeholderText="Data de Inicio"
+                         onChange={field.onChange} 
+                         selected={field.value} 
+                         className="w-full" 
+                         minDate={startDate ?? tripStartDate}
+                         maxDate={tripEndDate}
+                         />
 
                     )}
                     
@@ -67,7 +88,7 @@ export function TripReservation({ trip }: TripReservationProps) {
                     message: 'Número de hóspedes é obrigatorio.'
                 }
             })}
-            placeholder={`Número de hóspedes (max: ${trip.maxGuests})`} 
+            placeholder={`Número de hóspedes (max: ${maxGuests})`} 
             className="mt-4" 
             error={!!errors?.guests}
             errorMessage={errors?.guests?.message}
