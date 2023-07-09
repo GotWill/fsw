@@ -4,6 +4,7 @@ import ReactCountryFlag from "react-country-flag";
 import { TripHeader } from "./components/TripHeader";
 import { TripReservation } from "./components/TripReservation";
 import { TripDescription } from "./components/TripDescription";
+import { TripHighLights } from "./components/TripHighLights";
 
 
 async function getTrip(tripId: string) {
@@ -22,6 +23,8 @@ async function TripDetails({ params }: { params: { tripId: string } }) {
 
     if (!trip) return null;
 
+    console.log(trip.highlights)
+
     return (
         <div className="container mx-auto">
            
@@ -29,6 +32,7 @@ async function TripDetails({ params }: { params: { tripId: string } }) {
 
            <TripReservation trip={trip}/>
            <TripDescription description={trip.description}/>
+           <TripHighLights highlights={trip.highlights}/>
         </div>
     )
 }

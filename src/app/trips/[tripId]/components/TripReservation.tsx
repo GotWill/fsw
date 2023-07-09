@@ -24,7 +24,7 @@ export function TripReservation({ trip }: TripReservationProps) {
             </div>
 
             <div className="pb-10  border-b border-grayLighter w-full">
-                <Button className="mt-3">
+                <Button className="mt-3 w-full">
                     Reservar agora
                 </Button>
             </div>
