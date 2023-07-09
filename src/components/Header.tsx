@@ -3,6 +3,7 @@ import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { AiOutlineMenu } from 'react-icons/ai'
 import { useState } from "react";
+import Link from "next/link";
 
 export function Header() {
     const [menuIsOpen, setMenuIsOpen] = useState(false)
@@ -16,7 +17,10 @@ export function Header() {
 
     return (
         <header className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center">
-            <Image src='/logo.png' width={183} height={32} alt="" />
+
+            <Link href="/">
+              <Image src='/logo.png' width={183} height={32} alt="" />
+            </Link>
 
             {
                 status === 'unauthenticated' && (
