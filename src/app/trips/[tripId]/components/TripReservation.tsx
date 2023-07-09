@@ -48,14 +48,14 @@ export function TripReservation({tripId, maxGuests, pricePerDay, tripEndDate, tr
                 message: 'Esta data ja esta reservada'
             })
 
-            setError("endDate", {
+          return  setError("endDate", {
                 type: 'manual',
                 message: 'Esta data ja esta reservada'
             })
         }
 
         if(req?.error?.code === 'INVALID_START_DATE'){
-            setError("startDate", {
+            return  setError("startDate", {
                 type: 'manual',
                 message: 'Data invalida'
             })
@@ -63,7 +63,7 @@ export function TripReservation({tripId, maxGuests, pricePerDay, tripEndDate, tr
         }
 
         if(req?.error?.code === 'INVALID_END_DATE'){
-            setError("endDate", {
+            return  setError("endDate", {
                 type: 'manual',
                 message: 'Data invalida'
             })
@@ -135,12 +135,17 @@ export function TripReservation({tripId, maxGuests, pricePerDay, tripEndDate, tr
                 required: {
                     value: true,
                     message: 'Número de hóspedes é obrigatorio.'
+                },
+                max: {
+                    value: maxGuests,
+                    message: `Número de hóspedes não pode ser maior que ${maxGuests}`
                 }
             })}
             placeholder={`Número de hóspedes (max: ${maxGuests})`} 
             className="mt-4" 
             error={!!errors?.guests}
             errorMessage={errors?.guests?.message}
+            type="number"
             />
 
             <div className="flex justify-between mt-2">
