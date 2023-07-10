@@ -1,5 +1,5 @@
-
 'use client'
+
 
 import Button from "@/components/Button"
 import { Trip } from "@prisma/client"
@@ -10,6 +10,7 @@ import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import ReactCountryFlag from "react-country-flag"
+import { toast } from "react-toastify"
 
 function TripConfirmation({ params }: { params: { tripId: string } }) {
 
@@ -18,7 +19,9 @@ function TripConfirmation({ params }: { params: { tripId: string } }) {
 
     const searchParams = useSearchParams()
 
-    const { status } = useSession();
+    const { status, data } = useSession();
+
+    console.log(data?.user)
 
     const router = useRouter()
 
@@ -60,6 +63,27 @@ function TripConfirmation({ params }: { params: { tripId: string } }) {
     const guests = searchParams.get('guests')
 
 
+    async function handleByClick(){
+       const res = await fetch('http://localhost:3000/api/trips/reservation', {
+            method: 'POST',
+            body: Buffer.from(JSON.stringify({
+                tripId: params.tripId,
+                startDate: searchParams.get("startDate"),
+                endDate: searchParams.get("endDate"),
+                guests: Number(searchParams.get("guests")),
+                userId: (data?.user as any)?.id!,
+                totalPaid: totalPrice
+            }))
+        })
+
+        if(!res.ok){
+            return toast.error("Ocorreu um erro ao realizar sua reserva!", {position: 'bottom-center'})
+        }
+
+        router.push('/')
+
+        toast.success("Reserva realizada com sucesso", {position: 'bottom-center'})
+    }
 
 
     return (
@@ -105,7 +129,7 @@ function TripConfirmation({ params }: { params: { tripId: string } }) {
                 <h3 className="font-semibold mt-5">Hóspedes</h3>
                 <p> hóspedes {guests} </p>
 
-                <Button className="mt-5">
+                <Button className="mt-5" onClick={handleByClick}>
                     Finalizar Compra
                 </Button>
             </div>
