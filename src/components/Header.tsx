@@ -43,7 +43,7 @@ export function Header() {
                         {
                             menuIsOpen && (
                                 <div className="z-50 absolute top-12 left-4 pb-2 border-b border-grayLighter border-solid w-full h-[100px] bg-white rounded-lg">
-                                    <Link href="/my-trips"  className="text-primary font-semibold">
+                                    <Link href="/my-trips"  className="text-primary font-semibold" onClick={() => setMenuIsOpen(false)}>
                                      Minhas vaigens
                                    </Link>
                                    <button className="text-primary font-semibold pt-2" onClick={handleLogoutClick}>
