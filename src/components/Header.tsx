@@ -15,6 +15,8 @@ export function Header() {
         signOut()
     }
 
+   
+
     return (
         <header className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center">
 
@@ -24,6 +26,7 @@ export function Header() {
 
             {
                 status === 'unauthenticated' && (
+                    
                     <button className="text-primary text-sm font-semibold" onClick={handleLoginClick}>
                         Login
                     </button>
@@ -39,8 +42,11 @@ export function Header() {
 
                         {
                             menuIsOpen && (
-                                <div className="z-50 absolute top-12 left-4 w-full h-full bg-white rounded-lg">
-                                   <button className="text-primary font-semibold" onClick={handleLogoutClick}>
+                                <div className="z-50 absolute top-12 left-4 pb-2 border-b border-grayLighter border-solid w-full h-[100px] bg-white rounded-lg">
+                                    <Link href="/my-trips"  className="text-primary font-semibold">
+                                     Minhas vaigens
+                                   </Link>
+                                   <button className="text-primary font-semibold pt-2" onClick={handleLogoutClick}>
                                      Logout
                                    </button>
                                 </div>
