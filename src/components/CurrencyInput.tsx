@@ -23,6 +23,7 @@ function CurrencyInput({
       <_CurrencyInput
         lang="pt-BR"
         className={inputClassName}
+        allowDecimals={false}
         intlConfig={{ locale: "pt-BR", currency: "BRL" }}
         {...props}
       />
