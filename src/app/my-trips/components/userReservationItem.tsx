@@ -10,10 +10,12 @@ import { useRouter } from "next/navigation"
 interface userReservationItemProps {
     reservation: Prisma.TripReservationGetPayload<{
         include: {trip: true}
+    
     }>
+    fetchReservations: () => void
 }
 
-export function UserReservationItem({reservation}: userReservationItemProps){
+export function UserReservationItem({reservation, fetchReservations}: userReservationItemProps){
 
     const {trip} = reservation
 
@@ -30,7 +32,7 @@ export function UserReservationItem({reservation}: userReservationItemProps){
 
         toast.success('Reserva cancelada com sucesso!')
 
-        router.refresh()
+        fetchReservations()
     }
 
     return (

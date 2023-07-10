@@ -21,18 +21,18 @@ function MyTrips() {
 
     const router = useRouter()
 
-
+    async function fetchReservations() {
+        const response = await fetch(`http://localhost:3000/api/user/${(data?.user as any)?.id}/reservations`)
+        const json = await response.json()
+        setReservations(json)
+    }
 
     useEffect(() => {
-        if (status === 'unauthenticated' || !data?.user) {
+        if (status === 'unauthenticated') {
             return router.push('/')
         }
 
-        async function fetchReservations() {
-            const response = await fetch(`http://localhost:3000/api/user/${(data?.user as any).id}/reservations`)
-            const json = await response.json()
-            setReservations(json)
-        }
+        
 
         fetchReservations()
     }, [status])
@@ -42,12 +42,12 @@ function MyTrips() {
             <h1 className="font-semibold text-xl text-primaryDarker">Minhas viagens</h1>
 
             {
-                reservations.length > 0 ? reservations.map(reservation => <UserReservationItem key={reservation.id} reservation={reservation} />) 
-                :<div className="flex flex-col">
+                reservations.length > 0 ? reservations.map(reservation => <UserReservationItem fetchReservations={fetchReservations} key={reservation.id} reservation={reservation} />) 
+                :<div className="flex flex-col w-full">
                     <p className="font-medium text-primaryDarker text-xl mt-2">Voce nao tem nenhuma reserva!</p>
 
                    <Link href="/">
-                     <Button>Fazer reserva</Button>
+                     <Button className="w-full">Fazer reserva</Button>
                    </Link>
                 </div>
             }
