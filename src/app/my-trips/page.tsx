@@ -22,7 +22,7 @@ function MyTrips() {
     const router = useRouter()
 
     async function fetchReservations() {
-        const response = await fetch(`http://localhost:3000/api/user/${(data?.user as any)?.id}/reservations`)
+        const response = await fetch(`/api/user/${(data?.user as any)?.id}/reservations`)
         const json = await response.json()
         setReservations(json)
     }
