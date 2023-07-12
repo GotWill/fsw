@@ -78,7 +78,7 @@ export function TripHeader({trip}: HeaderProps) {
         </div>
       </div>
 
-            <div className="flex flex-col p-5 lg:p-0 lg:mb-10">
+            <div className="flex flex-col p-5 lg:p-0 lg:mb-10 lg:pt-10">
                 <h1 className="font-semibold text-xl text-primaryDarker lg:text-3xl">{trip.name}</h1>
                 <div className="flex items-center gap-1 my-1">
                     <ReactCountryFlag countryCode={trip.countryCode} svg />

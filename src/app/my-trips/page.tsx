@@ -43,16 +43,16 @@ function MyTrips() {
 
             {
                 reservations.length > 0 ? 
-                <div className="flex flex-col lg:flex-row lg:flex-wrap lg:gap-14">
+                <div className="flex flex-col lg:grid lg:grid-cols-3 lg:gap-14">
                     {
                         reservations.map(reservation => <UserReservationItem fetchReservations={fetchReservations} key={reservation.id} reservation={reservation} />)
                     }
                 </div>
-                    : <div className="flex flex-col w-full">
+                    : <div className="flex flex-col w-full lg:max-w-[500px]">
                         <p className="font-medium text-primaryDarker text-xl mt-2">Voce nao tem nenhuma reserva!</p>
 
                         <Link href="/">
-                            <Button className="w-full">Fazer reserva</Button>
+                            <Button className="w-full lg:mt-5">Fazer reserva</Button>
                         </Link>
                     </div>
             }

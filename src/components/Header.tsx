@@ -18,7 +18,7 @@ export function Header() {
    
 
     return (
-        <header className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center">
+        <header className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center lg:border-b lg:border-grayLighter">
 
             <Link href="/">
               <Image src='/logo.png' width={183} height={32} alt="" />
@@ -36,14 +36,14 @@ export function Header() {
             {
                 status === 'authenticated' && data.user && (
                     <div className="flex items-center gap-5 border border-solid border-grayLighter p-2 px-3 rounded-full relative">
-                        <AiOutlineMenu size={16} onClick={() => setMenuIsOpen(true)} className="cursor-pointer"/>
+                        <AiOutlineMenu size={16} onClick={() => setMenuIsOpen(!menuIsOpen)} className="cursor-pointer"/>
                         <Image className="rounded-full shadow-md" src={data.user.image!} width={24} height={24} alt={data.user.name!} />
 
 
                         {
                             menuIsOpen && (
-                                <div className="z-50 absolute top-12 left-4 pb-2 border-b border-grayLighter border-solid w-full h-[100px] bg-white rounded-lg">
-                                    <Link href="/my-trips"  className="text-primary font-semibold" onClick={() => setMenuIsOpen(false)}>
+                                <div className="z-50 absolute top-12 right-1 p-5 shadow-2xl border-b flex flex-col items-center justify-center border-grayLighter border-solid w-max  bg-white rounded-lg">
+                                    <Link href="/my-trips"  className="text-primary font-semibold border-b border-gray-400" onClick={() => setMenuIsOpen(false)}>
                                      Minhas vaigens
                                    </Link>
                                    <button className="text-primary font-semibold pt-2" onClick={handleLogoutClick}>
