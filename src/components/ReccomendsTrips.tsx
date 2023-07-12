@@ -21,7 +21,7 @@ export async function ReccomendsTrips() {
             </div>
 
 
-            <div className="flex flex-col items-center mt-5 gap-5">
+            <div className="flex flex-col items-center mt-5 gap-5 lg:flex-row lg:flex-wrap lg:justify-center lg:gap-10 lg:mt-12">
                 {
                     trips.map((trip: Trip) => {
                         return <TripItem trip={trip} key={trip.id} />
