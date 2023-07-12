@@ -27,14 +27,20 @@ async function TripDetails({ params }: { params: { tripId: string } }) {
     console.log(trip.highlights)
 
     return (
-        <div className="container mx-auto">
-           
-           <TripHeader trip={trip}/>
+        <div className="container mx-auto lg:px-10">
 
-           <TripReservation tripId={trip.id} pricePerDay={trip.pricePerDay as any} tripStartDate={trip.startDate} tripEndDate={trip.endDate} maxGuests={trip.maxGuests}/>
-           <TripDescription description={trip.description}/>
-           <TripHighLights highlights={trip.highlights}/>
-           <TripLocation location={trip.location} locationDescription={trip.locationDescription}/>
+            <TripHeader trip={trip} />
+
+            <div className="flex flex-col lg:flex-row lg:mt-12 lg:gap-20">
+                <div className="order-2">
+                <TripReservation tripId={trip.id} pricePerDay={trip.pricePerDay as any} tripStartDate={trip.startDate} tripEndDate={trip.endDate} maxGuests={trip.maxGuests} />
+                </div>
+                <div className="order-1">
+                <TripDescription description={trip.description} />
+                <TripHighLights highlights={trip.highlights} />
+                </div>
+            </div>
+            <TripLocation location={trip.location} locationDescription={trip.locationDescription} />
         </div>
     )
 }
