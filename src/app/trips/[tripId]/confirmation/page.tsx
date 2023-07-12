@@ -82,7 +82,6 @@ function TripConfirmation({ params }: { params: { tripId: string } }) {
             return toast.error("Ocorreu um erro ao realizar sua reserva!", {position: 'bottom-center'})
         }
 
-        // router.push('/')
 
        const {sessionId} = await res.json()
 
