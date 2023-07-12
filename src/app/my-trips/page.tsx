@@ -32,24 +32,29 @@ function MyTrips() {
             return router.push('/')
         }
 
-        
+
 
         fetchReservations()
     }, [status])
 
     return (
         <div className="container mx-auto p-5">
-            <h1 className="font-semibold text-xl text-primaryDarker">Minhas viagens</h1>
+            <h1 className="font-semibold text-xl text-primaryDarker lg:mb-5">Minhas viagens</h1>
 
             {
-                reservations.length > 0 ? reservations.map(reservation => <UserReservationItem fetchReservations={fetchReservations} key={reservation.id} reservation={reservation} />) 
-                :<div className="flex flex-col w-full">
-                    <p className="font-medium text-primaryDarker text-xl mt-2">Voce nao tem nenhuma reserva!</p>
-
-                   <Link href="/">
-                     <Button className="w-full">Fazer reserva</Button>
-                   </Link>
+                reservations.length > 0 ? 
+                <div className="flex flex-col lg:flex-row lg:flex-wrap lg:gap-14">
+                    {
+                        reservations.map(reservation => <UserReservationItem fetchReservations={fetchReservations} key={reservation.id} reservation={reservation} />)
+                    }
                 </div>
+                    : <div className="flex flex-col w-full">
+                        <p className="font-medium text-primaryDarker text-xl mt-2">Voce nao tem nenhuma reserva!</p>
+
+                        <Link href="/">
+                            <Button className="w-full">Fazer reserva</Button>
+                        </Link>
+                    </div>
             }
         </div>
     )
