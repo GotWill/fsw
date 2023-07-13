@@ -20,7 +20,7 @@ export function TripLocation({ location, locationDescription }: TripLocationProp
             </div>
 
 
-            <div className="relative h-[480px] w-full hiddem lg:block">
+            <div className="relative h-[480px] w-full hidden lg:block">
                 <Image src="/map-desktop.png" fill style={{
                     objectFit: 'cover'
                 }} alt={location} 
