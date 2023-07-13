@@ -64,7 +64,7 @@ function TripConfirmation({ params }: { params: { tripId: string } }) {
 
 
     async function handleByClick(){
-       const res = await fetch('http://localhost:3000/api/payment', {
+       const res = await fetch('/api/payment', {
             method: 'POST',
             body: Buffer.from(JSON.stringify({
                 tripId: params.tripId,
